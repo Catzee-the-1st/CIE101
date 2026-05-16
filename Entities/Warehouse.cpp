@@ -47,6 +47,9 @@ bool Warehouse::isClicked(int x, int y) const
 
 void Warehouse::openInventoryWindow() const
 {
+    pGame->setPaused(true);
+    pGame->printMessage("Inventory open - game paused");
+
     window* pWind = pGame->getWind();
     window* pNewWind = new window(300, 200, 200, 200);
     pNewWind->SetBrush(WHITE);
@@ -75,4 +78,7 @@ void Warehouse::openInventoryWindow() const
     pNewWind->WaitMouseClick(x, y);
 
     delete pNewWind;
+
+    pGame->setPaused(false);
+    pGame->printMessage("Inventory closed - game resumed");
 }
