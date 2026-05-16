@@ -45,40 +45,104 @@ bool Warehouse::isClicked(int x, int y) const
             y >= RefPoint.y && y <= RefPoint.y + 80);
 }
 
-void Warehouse::openInventoryWindow() const
+bool Warehouse::sellEggs(int count)
 {
-    pGame->setPaused(true);
-    pGame->printMessage("Inventory open - game paused");
+    if (eggsCount >= count && count > 0) {
+        eggsCount = eggsCount - count;
+        int earned = count * 5;
+        pGame->budget = pGame->budget + earned;
+        return true;
+    }
+    return false;
+}
 
-    window* pWind = pGame->getWind();
-    window* pNewWind = new window(300, 200, 200, 200);
-    pNewWind->SetBrush(WHITE);
-    pNewWind->SetPen(BLACK, 1);
-    pNewWind->DrawRectangle(0, 0, 300, 200);
+bool Warehouse::sellMilk(int count)
+{
+    if (milkCount >= count && count > 0) {
+        milkCount = milkCount - count;
+        int earned = count * 10;
+        pGame->budget = pGame->budget + earned;
+        return true;
+    }
+    return false;
+}
 
-    pNewWind->SetPen(BLACK, 2);
-    pNewWind->SetFont(20, BOLD, BY_NAME, "Arial");
-    pNewWind->DrawString(80, 20, "INVENTORY");
+void Warehouse::openInventoryWindow()
+{
+    window* pNewWind = new window(300, 250, 200, 200);
 
-    pNewWind->SetFont(16, BOLD, BY_NAME, "Arial");
-    stringstream ss;
-    ss << "Eggs: " << eggsCount;
-    pNewWind->DrawString(50, 60, ss.str());
+    const int eggBtnX = 200, eggBtnY = 55;
+    const int milkBtnX = 200, milkBtnY = 95;
+    const int eggPrice = 5;
+    const int milkPrice = 10;
 
-    stringstream ss2;
-    ss2 << "Milk: " << milkCount;
-    pNewWind->DrawString(50, 100, ss2.str());
+    int currentEggs = eggsCount;
+    int currentMilk = milkCount;
 
-    pNewWind->SetFont(12, PLAIN, BY_NAME, "Arial");
-    pNewWind->DrawString(50, 160, "Click anywhere to close");
+    while (true) {
+        pNewWind->SetBrush(WHITE);
+        pNewWind->SetPen(BLACK, 1);
+        pNewWind->DrawRectangle(0, 0, 300, 250);
 
-    pNewWind->UpdateBuffer();
+        pNewWind->SetPen(BLACK, 2);
+        pNewWind->SetFont(20, BOLD, BY_NAME, "Arial");
+        pNewWind->DrawString(80, 10, "INVENTORY");
 
-    int x, y;
-    pNewWind->WaitMouseClick(x, y);
+        pNewWind->SetFont(14, BOLD, BY_NAME, "Arial");
+
+        stringstream ss;
+        ss << "Eggs: " << currentEggs;
+        pNewWind->DrawString(30, 60, ss.str());
+
+        pNewWind->SetBrush(LIGHTGRAY);
+        pNewWind->SetPen(BLACK, 1);
+        pNewWind->DrawRectangle(eggBtnX, eggBtnY, eggBtnX + 60, eggBtnY + 20);
+        pNewWind->SetFont(10, BOLD, BY_NAME, "Arial");
+        pNewWind->DrawString(eggBtnX + 5, eggBtnY + 5, "SELL ($5)");
+
+        stringstream ss2;
+        ss2 << "Milk: " << currentMilk;
+        pNewWind->SetBrush(WHITE);
+        pNewWind->SetPen(BLACK, 1);
+        pNewWind->DrawString(30, 100, ss2.str());
+
+        pNewWind->SetBrush(LIGHTGRAY);
+        pNewWind->DrawRectangle(milkBtnX, milkBtnY, milkBtnX + 60, milkBtnY + 20);
+        pNewWind->SetFont(10, BOLD, BY_NAME, "Arial");
+        pNewWind->DrawString(milkBtnX + 5, milkBtnY + 5, "SELL ($10)");
+
+        pNewWind->SetFont(12, PLAIN, BY_NAME, "Arial");
+        pNewWind->SetBrush(WHITE);
+        pNewWind->DrawString(80, 220, "Click X to close");
+
+        pNewWind->UpdateBuffer();
+
+        int x, y;
+        clicktype clk = pNewWind->GetMouseClick(x, y);
+
+        if (clk == NO_CLICK) {
+            continue;
+        }
+
+        if (x >= eggBtnX && x <= eggBtnX + 60 && y >= eggBtnY && y <= eggBtnY + 20) {
+            if (currentEggs > 0) {
+                currentEggs--;
+                pGame->budget = pGame->budget + eggPrice;
+            }
+        }
+        else if (x >= milkBtnX && x <= milkBtnX + 60 && y >= milkBtnY && y <= milkBtnY + 20) {
+            if (currentMilk > 0) {
+                currentMilk--;
+                pGame->budget = pGame->budget + milkPrice;
+            }
+        }
+        else if (x >= 270 && x <= 295 && y >= 5 && y <= 25) {
+            break;
+        }
+    }
+
+    eggsCount = currentEggs;
+    milkCount = currentMilk;
 
     delete pNewWind;
-
-    pGame->setPaused(false);
-    pGame->printMessage("Inventory closed - game resumed");
 }
