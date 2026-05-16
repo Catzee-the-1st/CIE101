@@ -297,9 +297,7 @@ void Game::go()
         string everything = all_info + "     " + level_string + "     " + goal + "     " + animals_string;
 
         if (!isPaused) {
-            if (ChickIcon::chick_count >= goal_chickens &&
-                cowIcon::cow_count >= goal_cows &&
-                water_counter >= goal_water)
+            if (budget == target_budget)
             {
                 for (int i = 0; i < 50; i++) {
                     delete chicken_list[i]; chicken_list[i] = nullptr;
@@ -324,7 +322,7 @@ void Game::go()
                 updatelevel();
                 updateGoals();
                 levelTime = baseTime + ((level - 1) * scalingFactor);
-                target_budget = budget + (level * 1000);
+                //target_budget = budget + (level * 1000);
                 printMessage("LEVEL " + to_string(level) + " START!");
             }
         }
