@@ -1,6 +1,6 @@
 #pragma once
 #include "../Core/Drawable.h"
-
+struct point;
 class Warehouse : public Drawable
 {
 private:

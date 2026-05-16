@@ -49,8 +49,8 @@ public:
     int goal_cows = 5;
     int goal_water = 20;
 
-    int budget = 2000;
-    int target_budget = budget + level*500;
+    int budget = 2000 ;
+    int target_budget = 2000 + ((level - 1) * 500);
     int water_counter = 0;
     int level = 1;
     bool level_completed = false;
@@ -69,7 +69,7 @@ public:
     int remain_sec() const { return ((levelTime - timer) / 50) % 60; }
     int remain_min() const { return (levelTime - timer) / 3000; }
     void updatelevel();
-    void restarGame();
+    void restartGame();
     void addFood(GrassFood* pFood);
     void removeGameObject(GrassFood* pFood);
 

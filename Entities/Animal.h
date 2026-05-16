@@ -6,6 +6,7 @@ class Animal : public Drawable
 private:
     string image_path;
 public:
+    int foodcount = 0;
     point curr_pos;
     point curr_vel;
     Animal(Game* r_pGame, point r_point, int r_width, int r_height, string img_path);
@@ -21,6 +22,7 @@ private:
     bool has_target = false;
     int eatCounter = 0;
     int eggCount = 0;
+    int foodcount = 0;
     int productionTimer = 0;
     static const int eggProductionTime = 500;
 

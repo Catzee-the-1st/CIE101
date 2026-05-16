@@ -10,6 +10,7 @@ GrassFood::GrassFood(Game* pGame, point ref)
     foodAmount = 10;
     collisionCooldown = 0;
     markedForRemoval = false;
+    lastAnimal = nullptr;
 }
 
 void GrassFood::draw() const
@@ -42,6 +43,7 @@ void GrassFood::collisionAction(Animal* pAnimal)
 
     collisionCooldown = 50;
     foodAmount--;
+    pAnimal->foodcount++;
 
     Chick* pChick = dynamic_cast<Chick*>(pAnimal);
     if (pChick != nullptr)

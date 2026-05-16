@@ -5,10 +5,12 @@
 class GrassFood : public GameObject {
 private:
     int foodAmount;
-    int collisionCooldown;
-    bool markedForRemoval;
+   
 
 public:
+    Animal* lastAnimal;
+    int collisionCooldown;//task 31
+    bool markedForRemoval; 
     GrassFood(Game* pGame, point ref);
 
     virtual void draw() const override;

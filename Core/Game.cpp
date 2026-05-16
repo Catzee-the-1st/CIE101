@@ -112,6 +112,7 @@ void Game::updateGoals()
 void Game::updatelevel()
 {
     level++;
+    budget = 2000 + (level - 1) * 500;
 }
 
 void Game::spawnWolfByTimeAndLevel()
@@ -237,6 +238,65 @@ void Game::printMessage(string msg) const
     pWind->SetPen(config.penColor, 50);
     pWind->SetFont(24, BOLD, BY_NAME, "Arial");
     pWind->DrawString(10, config.windHeight - (int)(0.85 * config.statusBarHeight), msg);
+}
+void Game::restartGame()
+{
+    // Delete chickens, cows, food
+    for (int i = 0; i < 50; i++)
+    {
+        if (chicken_list[i] != nullptr)
+        {
+            delete chicken_list[i];
+            chicken_list[i] = nullptr;
+        }
+
+
+        if (cow_list[i] != nullptr)
+        {
+            delete cow_list[i];
+            cow_list[i] = nullptr;
+        }
+
+        if (food_list[i] != nullptr)
+        {
+            food_list[i]->collisionCooldown = 0;
+            food_list[i]->markedForRemoval = false;
+            delete food_list[i];
+            food_list[i] = nullptr;
+        }
+
+        egg_items[i].active = false;
+        milk_items[i].active = false;
+    }
+
+    // Delete wolves
+    for (int i = 0; i < 10; i++)
+    {
+        if (wolves[i] != nullptr)
+        {
+            delete wolves[i];
+            wolves[i] = nullptr;
+        }
+    }
+
+    wolf_count = 0;
+    green_count = 0;
+
+    // Reset counters
+    ChickIcon::chick_count = 0;
+    cowIcon::cow_count = 0;
+    water_counter = 0;
+    Chick::next_id = 0;
+    Cow::next_id = 0;
+    Wolf::next_id = 0;
+
+    // Reset timer and level
+    timer = 0;
+    level = 1;
+
+    updateGoals();
+
+    printMessage("Game Restarted!");
 }
 
 void Game::go()
