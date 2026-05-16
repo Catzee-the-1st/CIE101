@@ -31,6 +31,7 @@ private:
     int scalingFactor = 15;
     bool isPaused;
     int game_over_timer = 0;
+    int money;
 
 public:
     void setPaused(bool p);
@@ -68,7 +69,7 @@ public:
     int remain_sec() const { return ((levelTime - timer) / 50) % 60; }
     int remain_min() const { return (levelTime - timer) / 3000; }
     void updatelevel();
-
+    void restarGame();
     void addFood(GrassFood* pFood);
     void removeGameObject(GrassFood* pFood);
 
@@ -92,4 +93,6 @@ public:
     int wolf_count = 0;
     void spawnWolfByTimeAndLevel();
     int last_level = 1;
+    void addMoney(int amount );
+    int getMoney()const;
 };

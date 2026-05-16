@@ -35,6 +35,7 @@ Game::Game()
     warehouse = new Warehouse(this, warehousePos);
 
     clearStatusBar();
+    money = 0;
 }
 
 void Game::setPaused(bool p) {
