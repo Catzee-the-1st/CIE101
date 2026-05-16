@@ -347,9 +347,7 @@ void Game::go()
 
         string level_string = "LEVEL: " + to_string(level);
         string goal = "GOAL: "
-            + to_string(goal_chickens) + " chickens, "
-            + to_string(goal_cows) + " cows, "
-            + to_string(goal_water) + " water bottles";
+            + to_string(target_budget);
         int total_chickens = ChickIcon::chick_count;
         int total_cows = cowIcon::cow_count;
         string animals_string = "ANIMALS: Chickens = "

@@ -50,9 +50,10 @@ public:
     int goal_water = 20;
 
     int budget = 2000 ;
-    int target_budget = 2000 + ((level - 1) * 500);
+    
     int water_counter = 0;
     int level = 1;
+    int target_budget = 2000 + level * 100;
     bool level_completed = false;
     int levelTime = baseTime;
 
