@@ -1,0 +1,87 @@
+#pragma once
+#include "../Core/Drawable.h"
+
+// ─── Base icon ───────────────────────────────────────────────────────────────
+
+class ToolbarIcon : public Drawable
+{
+private:
+    string image_path;
+public:
+    ToolbarIcon(Game* r_pGame, point r_point, int r_width, int r_height, string img_path);
+    virtual void draw() const override;
+    virtual void onClick() = 0;   // Action taken when this icon is clicked
+};
+
+// ─── Concrete icon classes ────────────────────────────────────────────────────
+
+class RestartIcon : public ToolbarIcon
+{
+public:
+    RestartIcon(Game* r_pGame, point r_point, int r_width, int r_height, string img_path);
+    virtual void onClick();
+};
+
+class PauseIcon : public ToolbarIcon
+{
+public:
+    PauseIcon(Game* r_pGame, point r_point, int r_width, int r_height, string img_path);
+    virtual void onClick();
+};
+
+class ResumeIcon : public ToolbarIcon
+{
+public:
+    ResumeIcon(Game* r_pGame, point r_point, int r_width, int r_height, string img_path);
+    virtual void onClick();
+};
+
+class SaveIcon : public ToolbarIcon
+{
+public:
+    SaveIcon(Game* r_pGame, point r_point, int r_width, int r_height, string img_path);
+    virtual void onClick();
+};
+
+class LoadGameIcon : public ToolbarIcon
+{
+public:
+    LoadGameIcon(Game* r_pGame, point r_point, int r_width, int r_height, string img_path);
+    virtual void onClick();
+};
+
+class ExitIcon : public ToolbarIcon
+{
+public:
+    ExitIcon(Game* r_pGame, point r_point, int r_width, int r_height, string img_path);
+    virtual void onClick();
+};
+
+// ─── Icon order enum ──────────────────────────────────────────────────────────
+// Change the order here to reorder icons in the toolbar.
+
+enum ICONS
+{
+    ICON_RESTART,
+    ICON_PAUSE,
+    ICON_RESUME,
+    ICON_SAVE,
+    ICON_LOAD,
+    ICON_EXIT,
+    ICON_COUNT   // Must be last — equals the total number of icons
+};
+
+// ─── Toolbar ──────────────────────────────────────────────────────────────────
+
+class Toolbar : public Drawable
+{
+private:
+    ToolbarIcon** iconsList;
+    string iconsImages[ICON_COUNT];
+
+public:
+    Toolbar(Game* r_pGame, point r_point, int r_width, int r_height);
+    ~Toolbar();
+    void draw() const override;
+    bool handleClick(int x, int y);   // Returns true if Exit was clicked
+};
