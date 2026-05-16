@@ -15,4 +15,8 @@ public:
     void addMilk() { milkCount++; }
     int getEggs()  const { return eggsCount; }
     int getMilk()  const { return milkCount; }
+    bool sellEggs(int count);
+    bool sellMilk(int count);
+    bool isClicked(int x, int y) const;
+    void openInventoryWindow();
 };

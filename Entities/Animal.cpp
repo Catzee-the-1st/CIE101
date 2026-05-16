@@ -64,6 +64,15 @@ void Chick::moveStep()
         if (curr_pos.y < target.y) curr_pos.y += speed;
         else if (curr_pos.y > target.y) curr_pos.y -= speed;
 
+        if (curr_pos.x <= min_x || curr_pos.x + width >= max_x ||
+            curr_pos.y <= min_y || curr_pos.y + height >= max_y) {
+
+            if (curr_pos.x <= min_x) target.x = max_x - width - 10;
+            else if (curr_pos.x + width >= max_x) target.x = min_x + 10;
+            if (curr_pos.y <= min_y) target.y = max_y - height - 10;
+            else if (curr_pos.y + height >= max_y) target.y = min_y + 10;
+        }
+
         float distance = sqrt(pow((float)(target.x - curr_pos.x), 2.0f)
             + pow((float)(target.y - curr_pos.y), 2.0f));
         if (distance < (float)speed)
@@ -106,6 +115,15 @@ void Cow::moveStep()
         else if (curr_pos.x > target.x) curr_pos.x -= speed;
         if (curr_pos.y < target.y) curr_pos.y += speed;
         else if (curr_pos.y > target.y) curr_pos.y -= speed;
+
+        if (curr_pos.x <= min_x || curr_pos.x + width >= max_x ||
+            curr_pos.y <= min_y || curr_pos.y + height >= max_y) {
+
+            if (curr_pos.x <= min_x) target.x = max_x - width - 10;
+            else if (curr_pos.x + width >= max_x) target.x = min_x + 10;
+            if (curr_pos.y <= min_y) target.y = max_y - height - 10;
+            else if (curr_pos.y + height >= max_y) target.y = min_y + 10;
+        }
 
         float distance = sqrt(pow((float)(target.x - curr_pos.x), 2.0f)
             + pow((float)(target.y - curr_pos.y), 2.0f));
@@ -158,6 +176,15 @@ void Wolf::move()
         else if (curr_pos.x > target.x) curr_pos.x -= speed;
         if (curr_pos.y < target.y) curr_pos.y += speed;
         else if (curr_pos.y > target.y) curr_pos.y -= speed;
+
+        if (curr_pos.x <= min_x || curr_pos.x + width >= max_x ||
+            curr_pos.y <= min_y || curr_pos.y + height >= max_y) {
+
+            if (curr_pos.x <= min_x) target.x = max_x - width - 10;
+            else if (curr_pos.x + width >= max_x) target.x = min_x + 10;
+            if (curr_pos.y <= min_y) target.y = max_y - height - 10;
+            else if (curr_pos.y + height >= max_y) target.y = min_y + 10;
+        }
 
         float distance = sqrt(pow((float)(target.x - curr_pos.x), 2.0f)
             + pow((float)(target.y - curr_pos.y), 2.0f));

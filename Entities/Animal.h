@@ -92,6 +92,8 @@ class Wolf : public Animal
 private:
     point target;
     bool has_target = false;
+    int clickCount = 0;
+    static const int clicksNeeded = 5;
 public:
     static float speed;
     static int next_id;
@@ -102,5 +104,6 @@ public:
     void move();
     virtual void draw() const override;
     bool isClicked(int clickX, int clickY) const;
-    void kill() { isDead = true; }
+    bool hit() { clickCount++; return clickCount >= clicksNeeded; }
+    int getClickCount() const { return clickCount; }
 };

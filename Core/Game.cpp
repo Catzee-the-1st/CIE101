@@ -516,7 +516,9 @@ void Game::go()
             printBudget(water_string + "     " + budget_string);
         }
 
-        pWind->UpdateBuffer();
+        if (!isPaused) {
+            pWind->UpdateBuffer();
+        }
         Sleep(20);
 
         clicktype clk = getMouseClick(x, y);
@@ -550,9 +552,16 @@ void Game::go()
                     for (int i = 0; i < wolf_count; i++) {
                         if (wolves[i] != nullptr && !wolves[i]->isDead) {
                             if (wolves[i]->isClicked(x, y)) {
-                                wolves[i]->kill();
-                                printMessage("Wolf killed! +$50 reward");
-                                budget += 50;
+                                bool shouldKill = wolves[i]->hit();
+                                int clicks = wolves[i]->getClickCount();
+                                if (shouldKill) {
+                                    wolves[i]->isDead = true;
+                                    printMessage("Wolf killed! +$50 reward");
+                                    budget += 50;
+                                }
+                                else {
+                                    printMessage("Wolf hit! " + to_string(5 - clicks) + " more clicks to kill");
+                                }
                                 break;
                             }
                         }
