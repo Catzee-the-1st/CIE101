@@ -3,11 +3,11 @@
 struct point;
 class Warehouse : public Drawable
 {
-private:
-    int eggsCount;
-    int milkCount;
+
 
 public:
+    int eggsCount;
+    int milkCount;
     Warehouse(Game* pGame, point ref);
     virtual void draw() const override;
 

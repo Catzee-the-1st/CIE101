@@ -292,7 +292,10 @@ void Game::restartGame()
     Chick::next_id = 0;
     Cow::next_id = 0;
     Wolf::next_id = 0;
-
+    if (warehouse != nullptr) {
+        warehouse->milkCount = 0;
+        warehouse->eggsCount = 0;
+    }
     // Reset timer and level
     timer = 0;
     level = 1;
