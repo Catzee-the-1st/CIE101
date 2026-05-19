@@ -98,7 +98,7 @@ bool Warehouse::sellEggs(int count)
 {
     if (eggsCount >= count && count > 0) {
         eggsCount = eggsCount - count;
-        int earned = count * 5;
+        int earned = count * 10;
         pGame->budget = pGame->budget + earned;
         return true;
     }
@@ -109,7 +109,7 @@ bool Warehouse::sellMilk(int count)
 {
     if (milkCount >= count && count > 0) {
         milkCount = milkCount - count;
-        int earned = count * 10;
+        int earned = count * 15;
         pGame->budget = pGame->budget + earned;
         return true;
     }
@@ -118,17 +118,14 @@ bool Warehouse::sellMilk(int count)
 
 void Warehouse::openInventoryWindow()
 {
-    // إنشاء النافذة الجديدة
     window* pNewWind = new window(300, 250, 200, 200);
 
     const int eggBtnX = 200, eggBtnY = 55;
     const int milkBtnX = 200, milkBtnY = 95;
 
-    // رسم زر الخروج (X) في أعلى اليمين عشان المستخدم يشوفه
     const int closeBtnX = 270, closeBtnY = 5;
 
     while (true) {
-        // 1. مسح الشاشة ورسم المحتويات
         pNewWind->SetBrush(WHITE);
         pNewWind->SetPen(BLACK, 1);
         pNewWind->DrawRectangle(0, 0, 300, 250);
@@ -137,7 +134,6 @@ void Warehouse::openInventoryWindow()
         pNewWind->SetFont(20, BOLD, BY_NAME, "Arial");
         pNewWind->DrawString(80, 10, "INVENTORY");
 
-        // زر الخروج المكتوب عليه X
         pNewWind->SetBrush(RED);
         pNewWind->DrawRectangle(closeBtnX, closeBtnY, closeBtnX + 25, closeBtnY + 20);
         pNewWind->SetPen(WHITE, 1);
@@ -147,16 +143,14 @@ void Warehouse::openInventoryWindow()
         pNewWind->SetFont(14, BOLD, BY_NAME, "Arial");
         pNewWind->SetPen(BLACK, 1);
 
-        // عرض البيض الحالي
         stringstream ss;
         ss << "Eggs: " << eggsCount;
         pNewWind->DrawString(30, 60, ss.str());
 
-        // زر بيع البيض
         pNewWind->SetBrush(LIGHTGRAY);
         pNewWind->DrawRectangle(eggBtnX, eggBtnY, eggBtnX + 60, eggBtnY + 20);
         pNewWind->SetFont(10, BOLD, BY_NAME, "Arial");
-        pNewWind->DrawString(eggBtnX + 5, eggBtnY + 5, "SELL ($5)");
+        pNewWind->DrawString(eggBtnX + 5, eggBtnY + 5, "SELL ($10)");
 
         stringstream ss2;
         ss2 << "Milk: " << milkCount;
@@ -165,7 +159,7 @@ void Warehouse::openInventoryWindow()
         pNewWind->SetBrush(LIGHTGRAY);
         pNewWind->DrawRectangle(milkBtnX, milkBtnY, milkBtnX + 60, milkBtnY + 20);
         pNewWind->SetFont(10, BOLD, BY_NAME, "Arial");
-        pNewWind->DrawString(milkBtnX + 5, milkBtnY + 5, "SELL ($10)");
+        pNewWind->DrawString(milkBtnX + 5, milkBtnY + 5, "SELL ($15)");
 
         pNewWind->UpdateBuffer();
 

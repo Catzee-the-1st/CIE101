@@ -23,10 +23,7 @@ void BudgetbarIcon::draw() const
 ChickIcon::ChickIcon(Game* r_pGame, point r_point, int r_width, int r_height, string img_path)
     : BudgetbarIcon(r_pGame, r_point, r_width, r_height, img_path)
 {
-    chickList = new Chick * [80];
-    for (int i = 0; i < 80; i++)
-        chickList[i] = nullptr;
-    count = 0;
+    
 }
 
 void ChickIcon::onClick()
@@ -42,9 +39,9 @@ void ChickIcon::onClick()
         p.x = uniform_int_distribution<int>(range_min_x, range_max_x)(gen1);
         p.y = uniform_int_distribution<int>(range_min_y, range_max_y)(gen2);
 
-        if (count < 150) {
+        if (chick_count < 150) {
             pGame->chicken_list[chick_count] = new Chick(pGame, p, 50, 50, "images\\chick.jpg");
-            count++;
+            
             chick_count++;
         }
         else {
@@ -64,10 +61,7 @@ void ChickIcon::onClick()
 cowIcon::cowIcon(Game* r_pGame, point r_point, int r_width, int r_height, string img_path)
     : BudgetbarIcon(r_pGame, r_point, r_width, r_height, img_path)
 {
-    cowList = new Cow * [80];
-    for (int i = 0; i < 80; i++)
-        cowList[i] = nullptr;
-    count = 0;
+    
 }
 
 void cowIcon::onClick()
@@ -83,9 +77,8 @@ void cowIcon::onClick()
         p.x = uniform_int_distribution<int>(range_min_x, range_max_x)(gen1) + 15;
         p.y = uniform_int_distribution<int>(range_min_y, range_max_y)(gen2);
 
-        if (count < 150) {
+        if (cow_count < 150) {
             pGame->cow_list[cow_count] = new Cow(pGame, p, 50, 50, "images\\cow.jpg");
-            count++;
             cow_count++;
         }
         else {

@@ -40,9 +40,9 @@ public:
     int green_count = 0;
     void spawnGreenArea();
 
-    GrassFood* food_list[50];
-    Chick* chicken_list[50];
-    Cow* cow_list[50];
+    GrassFood* food_list[150];
+    Chick* chicken_list[150];
+    Cow* cow_list[150];
 
     void updateGoals();
     int goal_chickens = 10;
@@ -53,7 +53,7 @@ public:
     
     int water_counter = 0;
     int level = 1;
-    int target_budget = 2000 + level * 100;
+    int target_budget = budget + level * 100;
     bool level_completed = false;
     int levelTime = baseTime;
 

@@ -28,8 +28,7 @@ class ChickIcon : public BudgetbarIcon
 {
 public:
     static int chick_count;
-    Chick** chickList;
-    int count = 0;
+    
     ChickIcon(Game* r_pGame, point r_point, int r_width, int r_height, string img_path);
     virtual void onClick();
 };
@@ -38,8 +37,7 @@ class cowIcon : public BudgetbarIcon
 {
 public:
     static int cow_count;
-    Cow** cowList;
-    int count = 0;
+   
     cowIcon(Game* r_pGame, point r_point, int r_width, int r_height, string img_path);
     virtual void onClick();
 };

@@ -113,6 +113,8 @@ void Game::updatelevel()
 {
     level++;
     budget = 2000 + (level - 1) * 500;
+    target_budget = budget + level * 100;
+
 }
 
 void Game::spawnWolfByTimeAndLevel()
