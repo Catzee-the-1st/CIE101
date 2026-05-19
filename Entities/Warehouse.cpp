@@ -30,7 +30,7 @@ void Warehouse::draw() const
 {
     window* pWind = pGame->getWind();
 
-    // ── outer box ──────────────────────────────────────────────────────────
+    //  outer box 
     pWind->SetPen(BLACK, 2);
     pWind->SetBrush(BROWN);
     pWind->DrawRectangle(RefPoint.x,
@@ -38,7 +38,7 @@ void Warehouse::draw() const
         RefPoint.x + WH_W,
         RefPoint.y + WH_H);
 
-    // ── dark-red header ────────────────────────────────────────────────────
+    // dark-red header
     pWind->SetBrush(DARKRED);
     pWind->DrawRectangle(RefPoint.x,
         RefPoint.y,
@@ -49,14 +49,14 @@ void Warehouse::draw() const
     pWind->SetFont(12, BOLD, BY_NAME, "Arial");
     pWind->DrawString(RefPoint.x + 5, RefPoint.y + 2, "WAREHOUSE");
 
-    // ── eggs count label ───────────────────────────────────────────────────
+    // eggs count label
     pWind->SetPen(BLACK, 1);
     pWind->SetFont(13, BOLD, BY_NAME, "Arial");
     stringstream ss;
     ss << "Eggs: " << eggsCount;
     pWind->DrawString(RefPoint.x + 5, RefPoint.y + EGGS_LABEL_Y, ss.str());
 
-    // ── SELL EGGS button ───────────────────────────────────────────────────
+    //  SELL EGGS button
     pWind->SetBrush(YELLOW);
     pWind->SetPen(BLACK, 1);
     pWind->DrawRectangle(RefPoint.x + SELL_EGG_X,
@@ -68,14 +68,14 @@ void Warehouse::draw() const
         RefPoint.y + SELL_EGG_Y + 1,
         "Sell Eggs ($10 each)");
 
-    // ── milk count label ───────────────────────────────────────────────────
+    // milk count label
     pWind->SetPen(BLACK, 1);
     pWind->SetFont(13, BOLD, BY_NAME, "Arial");
     stringstream ss2;
     ss2 << "Milk: " << milkCount;
     pWind->DrawString(RefPoint.x + 5, RefPoint.y + MILK_LABEL_Y, ss2.str());
 
-    // ── SELL MILK button ───────────────────────────────────────────────────
+    //  SELL MILK button
     pWind->SetBrush(LIGHTBLUE);
     pWind->SetPen(BLACK, 1);
     pWind->DrawRectangle(RefPoint.x + SELL_MILK_X,
@@ -158,12 +158,10 @@ void Warehouse::openInventoryWindow()
         pNewWind->SetFont(10, BOLD, BY_NAME, "Arial");
         pNewWind->DrawString(eggBtnX + 5, eggBtnY + 5, "SELL ($5)");
 
-        // عرض اللبن الحالي
         stringstream ss2;
         ss2 << "Milk: " << milkCount;
         pNewWind->DrawString(30, 100, ss2.str());
 
-        // زر بيع اللبن
         pNewWind->SetBrush(LIGHTGRAY);
         pNewWind->DrawRectangle(milkBtnX, milkBtnY, milkBtnX + 60, milkBtnY + 20);
         pNewWind->SetFont(10, BOLD, BY_NAME, "Arial");
@@ -171,35 +169,28 @@ void Warehouse::openInventoryWindow()
 
         pNewWind->UpdateBuffer();
 
-        // 2. التعامل مع الضغطات بدون تجميد البرنامج
         int x, y;
 
-        // ملحوظة: يفضل جداً استخدام WaitMouseClick لو المكتبة بتدعمها
-        // لو مش بتدعمها، سيب GetMouseClick بس الكود اللي تحت هيمنع الكراش
+     
         clicktype clk = pNewWind->GetMouseClick(x, y);
 
         if (clk == NO_CLICK) {
-            Sleep(50); // بنريح الـ CPU لمدة 50 مللي ثانية عشان البرنامج ميهنجش
+            Sleep(50); 
             continue;
         }
 
-        // زر بيع البيض
         if (x >= eggBtnX && x <= eggBtnX + 60 && y >= eggBtnY && y <= eggBtnY + 20) {
-            sellEggs(1); // استدعاء الدالة الأصلية عشان تحدث الـ budget والـ count بأمان
+            sellEggs(1);
         }
-        // زر بيع اللبن
         else if (x >= milkBtnX && x <= milkBtnX + 60 && y >= milkBtnY && y <= milkBtnY + 20) {
-            sellMilk(1); // استدعاء الدالة الأصلية
+            sellMilk(1); 
         }
-        // زر الخروج (X)
         else if (x >= closeBtnX && x <= closeBtnX + 25 && y >= closeBtnY && y <= closeBtnY + 20) {
             break;
         }
     }
 
-    // حذف النافذة وتنظيف الذاكرة
     delete pNewWind;
 
-    // إعادة رسم النافذة الرئيسية للعبة لتحديث الأرقام عليها فوراً
     pGame->getWind()->UpdateBuffer();
 }

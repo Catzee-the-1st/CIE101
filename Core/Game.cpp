@@ -267,6 +267,7 @@ void Game::restartGame()
 
         egg_items[i].active = false;
         milk_items[i].active = false;
+        budget = 2000;
     }
 
     // Delete wolves

@@ -5,13 +5,13 @@
 #include "Toolbar.h"
 #include <random>
 
-// ── Random placement bounds for newly spawned animals ──────────────────────
+//  Random placement bounds for newly spawned animals
 const int range_min_x = 50;
 const int range_max_x = config.windWidth - 50;
 const int range_min_y = (config.toolBarHeight * 2) + 50;
 const int range_max_y = config.windHeight - config.statusBarHeight - 50;
 
-// ─── Base icon ───────────────────────────────────────────────────────────────
+//  Base icon
 
 class BudgetbarIcon : public Drawable
 {
@@ -22,7 +22,7 @@ public:
     virtual void onClick() = 0;
 };
 
-// ─── Concrete purchase icons ──────────────────────────────────────────────────
+// Concrete purchase icons
 
 class ChickIcon : public BudgetbarIcon
 {
@@ -51,7 +51,7 @@ public:
     virtual void onClick();
 };
 
-// ─── Icon order enum ──────────────────────────────────────────────────────────
+// Icon order enum 
 
 enum BUDGET_ICONS
 {
@@ -61,7 +61,7 @@ enum BUDGET_ICONS
     BUDGET_ITEM_COUNT   // Must be last
 };
 
-// ─── BudgetBar ────────────────────────────────────────────────────────────────
+//  BudgetBar
 
 class Budgetbar : public Drawable
 {

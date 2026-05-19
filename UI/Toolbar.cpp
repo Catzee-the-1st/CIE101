@@ -5,7 +5,6 @@
 #include <fstream>
 using namespace std;
 
-// ─── ToolbarIcon (base) ───────────────────────────────────────────────────────
 
 ToolbarIcon::ToolbarIcon(Game* r_pGame, point r_point, int r_width, int r_height, string img_path)
     : Drawable(r_pGame, r_point, r_width, r_height)
@@ -19,7 +18,6 @@ void ToolbarIcon::draw() const
     pWind->DrawImage(image_path, RefPoint.x, RefPoint.y, width, height);
 }
 
-// ─── RestartIcon ──────────────────────────────────────────────────────────────
 
 RestartIcon::RestartIcon(Game* r_pGame, point r_point, int r_width, int r_height, string img_path)
     : ToolbarIcon(r_pGame, r_point, r_width, r_height, img_path) {
@@ -27,10 +25,10 @@ RestartIcon::RestartIcon(Game* r_pGame, point r_point, int r_width, int r_height
 
 void RestartIcon::onClick()
 {
-    // TODO: restart game
+    pGame->restartGame();
 }
 
-// ─── PauseIcon ────────────────────────────────────────────────────────────────
+//  PauseIcon 
 
 PauseIcon::PauseIcon(Game* r_pGame, point r_point, int r_width, int r_height, string img_path)
     : ToolbarIcon(r_pGame, r_point, r_width, r_height, img_path) {
@@ -42,7 +40,7 @@ void PauseIcon::onClick()
     pGame->printMessage("Game Paused!");
 }
 
-// ─── ResumeIcon ───────────────────────────────────────────────────────────────
+//  ResumeIcon
 
 ResumeIcon::ResumeIcon(Game* r_pGame, point r_point, int r_width, int r_height, string img_path)
     : ToolbarIcon(r_pGame, r_point, r_width, r_height, img_path) {
@@ -54,12 +52,6 @@ void ResumeIcon::onClick()
     pGame->printMessage("Game Resumed!");
 }
 
-// ─── SaveIcon ─────────────────────────────────────────────────────────────────
-// Save format:
-//   budget
-//   water_counter
-//   chick_count   x y  (one per line for each chick)
-//   cow_count     x y  (one per line for each cow)
 
 SaveIcon::SaveIcon(Game* r_pGame, point r_point, int r_width, int r_height, string img_path)
     : ToolbarIcon(r_pGame, r_point, r_width, r_height, img_path) {
@@ -99,7 +91,7 @@ void SaveIcon::onClick()
     pGame->printMessage("Game saved.");
 }
 
-// ─── LoadGameIcon ─────────────────────────────────────────────────────────────
+// LoadGameIcon 
 
 LoadGameIcon::LoadGameIcon(Game* r_pGame, point r_point, int r_width, int r_height, string img_path)
     : ToolbarIcon(r_pGame, r_point, r_width, r_height, img_path) {
@@ -150,7 +142,7 @@ void LoadGameIcon::onClick()
     pGame->printMessage("Game loaded.");
 }
 
-// ─── ExitIcon ─────────────────────────────────────────────────────────────────
+//  ExitIcon 
 
 ExitIcon::ExitIcon(Game* r_pGame, point r_point, int r_width, int r_height, string img_path)
     : ToolbarIcon(r_pGame, r_point, r_width, r_height, img_path) {
@@ -161,7 +153,7 @@ void ExitIcon::onClick()
     // Handled by handleClick() returning true — no extra work needed here
 }
 
-// ─── Toolbar ──────────────────────────────────────────────────────────────────
+// Toolbar 
 
 Toolbar::Toolbar(Game* r_pGame, point r_point, int r_width, int r_height)
     : Drawable(r_pGame, r_point, r_width, r_height)

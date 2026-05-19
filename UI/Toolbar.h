@@ -1,7 +1,7 @@
 #pragma once
 #include "../Core/Drawable.h"
 
-// ─── Base icon ───────────────────────────────────────────────────────────────
+// Base icon 
 
 class ToolbarIcon : public Drawable
 {
@@ -13,7 +13,7 @@ public:
     virtual void onClick() = 0;   // Action taken when this icon is clicked
 };
 
-// ─── Concrete icon classes ────────────────────────────────────────────────────
+// Concrete icon classes
 
 class RestartIcon : public ToolbarIcon
 {
@@ -57,8 +57,7 @@ public:
     virtual void onClick();
 };
 
-// ─── Icon order enum ──────────────────────────────────────────────────────────
-// Change the order here to reorder icons in the toolbar.
+
 
 enum ICONS
 {
@@ -71,7 +70,7 @@ enum ICONS
     ICON_COUNT   // Must be last — equals the total number of icons
 };
 
-// ─── Toolbar ──────────────────────────────────────────────────────────────────
+//  Toolbar 
 
 class Toolbar : public Drawable
 {

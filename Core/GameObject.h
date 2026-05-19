@@ -12,14 +12,7 @@ public:
 	void setRefPoint(point p);
 	bool CollisionDetection(const GameObject& gObj);
 
-	//-- The following functions should be supported by the shape class
-	//-- It should be overridden by each inherited shape
-	//-- Decide the parameters that you should pass to each function	
 
-	//virtual void move() = 0;		//Move the game object
-	//virtual void save(ofstream &OutFile) = 0;	//Save the shape parameters to the file
-	//virtual void load(ifstream &Infile) = 0;	//Load the shape parameters to the file
-	//virtual void collisionAction() = 0;    //action that should be performed upon collision
 
 };
 
