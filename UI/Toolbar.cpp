@@ -99,47 +99,41 @@ LoadGameIcon::LoadGameIcon(Game* r_pGame, point r_point, int r_width, int r_heig
 
 void LoadGameIcon::onClick()
 {
-    pGame->printMessage("Loading...");
+   pGame->printMessage("Loading...");
 
-    ifstream in("save.txt");
-    if (!in) {
-        pGame->printMessage("Load FAILED – save.txt not found");
-        return;
-    }
+ ifstream in("save.txt");
+ if (!in) {
+     pGame->printMessage("Load FAILED – save.txt not found");
+     return;
+ }
 
-    int b, wc;
-    in >> b >> wc;
-    pGame->setBudget(b);
-    pGame->water_counter = wc;
+ int b, wc;
+ in >> b >> wc;
+ pGame->setBudget(b);
+ pGame->water_counter = wc;
 
-    // Chickens
-    int chickCount;
-    in >> chickCount;
-    ChickIcon::chick_count = chickCount;
-    for (int i = 0; i < chickCount; i++) {
-        int x, y;
-        in >> x >> y;
-        if (pGame->chicken_list[i] != nullptr) {
-            pGame->chicken_list[i]->curr_pos.x = x;
-            pGame->chicken_list[i]->curr_pos.y = y;
-        }
-    }
+ int chickCount;
+ in >> chickCount;
+ ChickIcon::chick_count = chickCount;
+ for (int i = 0; i < chickCount; i++) {
+     int x, y;
+     in >> x >> y;
+     point p = { x, y };
+     pGame->chicken_list[i] = new Chick(pGame, p, 50, 50, "images\\chick.jpg");
+ }
 
-    // Cows
-    int cowCount;
-    in >> cowCount;
-    cowIcon::cow_count = cowCount;
-    for (int i = 0; i < cowCount; i++) {
-        int x, y;
-        in >> x >> y;
-        if (pGame->cow_list[i] != nullptr) {
-            pGame->cow_list[i]->curr_pos.x = x;
-            pGame->cow_list[i]->curr_pos.y = y;
-        }
-    }
+ int cowCount;
+ in >> cowCount;
+ cowIcon::cow_count = cowCount;
+ for (int i = 0; i < cowCount; i++) {
+     int x, y;
+     in >> x >> y;
+     point p = { x, y };
+     pGame->cow_list[i] = new Cow(pGame, p, 50, 50, "images\\cow.jpg");
+ }
 
-    in.close();
-    pGame->printMessage("Game loaded.");
+ in.close();
+ pGame->printMessage("Game loaded.");
 }
 
 //  ExitIcon 
